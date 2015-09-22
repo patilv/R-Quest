@@ -1,0 +1,168 @@
+---
+title: "1. Getting Started"
+author: "Vivek H. Patil"
+date: "September 17, 2015"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Getting and Loading Packages
+
+## Installing Packages from CRAN
+
+```{r eval=FALSE}
+install.packages("pkgname")
+install.packages("pkgname1","pkgname2") # For two or more packages 
+```
+
+## Installing a package from GitHub
+
+```{r eval=FALSE}
+if (!require("devtools")) install.packages("devtools") # Checks if the devtools package is available and if not, installs it from CRAN
+devtools::install_github("githubaccountname/packagerepository")
+```
+
+## Installed packages should be loaded for them to offer their functions for use
+
+```{r eval=FALSE}
+library(pkgname)
+```
+
+
+# Getting data
+
+## Load R file
+
+```{r eval=FALSE}
+load("filename.Rda")
+```
+
+## Delimited files text files
+```{r eval=FALSE}
+dataname=read.csv("datafilename.csv")# use ?read.csv to see options
+```
+
+## Excel Files
+```{r eval=FALSE}
+
+install.packages("readxl") # https://github.com/hadley/readxl
+read_excel("excelfilename.xls") # reads xlsx extensions also
+read_excel("excelfilename.xlsx", sheet = "nameofsheet")
+read_excel("excelfilename.xlsx", sheet = 3)# for third sheet, as an example
+read_excel("my-spreadsheet.xls", na = "NA") # if NAs are represented by non-blank cells, specify them with na=
+```
+
+## SPSS/SAS/Stata files
+
+```{r eval=FALSE}
+install.packages("haven") # https://github.com/hadley/haven
+read_sas("path/to/file") # SAS file
+read_por("path/to/file") # SPSS por files
+read_sav("path/to/file") # SPSS sav files
+read_dta("path/to/file")# Stata
+```
+
+## Many others
+```{r eval=FALSE}
+?read.table
+?readClipboard
+# Checkout the readr package from Hadley: https://github.com/hadley/readr
+```
+
+# Saving data
+
+```{r eval=FALSE}
+save(dataframename,file="filename.Rda") # To R data
+write.csv(dataframename,file="myfilename.csv") # to csv...see also ?write.csv
+write.table(dataframename,file="myfilename.tsv",sep="\t") # to tab-separated file...see also ?write.table
+```
+
+
+# Creating a dataframe
+
+```{r}
+Person=c("A","B","C","D","E")
+Age=c(15,20,25,30,35)
+Height=c(60,63,75,79,56)
+page=data.frame(Person,Age,Height)
+```
+
+
+# Little knowledge of data
+
+Number of rows and columns (in that sequence)
+
+```{r}
+dim(iris)
+```
+
+Number of rows
+```{r}
+nrow(iris)
+```
+
+Number of columns
+```{r}
+ncol(iris)
+```
+
+Names of variables
+```{r}
+names(iris) # colnames(iris) also gives that information
+```
+
+First 6 rows 
+```{r}
+head(iris)
+```
+
+First 2 rows
+```{r}
+head(iris,2) # alternately, can use iris[1:2,]
+```
+
+Last 6 rows
+```{r}
+tail(iris) # Number of rows can be controlled, see earlier example involving the head command
+```
+
+First row
+```{r}
+iris[1,]
+```
+First row, first column
+```{r}
+iris[1,1]
+```
+
+Name of third column
+```{r}
+names(iris)[3]
+```
+
+3 entries from third column
+```{r}
+head(iris[3],3) # alternately, we can use iris[1:3,3]
+```
+Structure of the dataframe
+```{r}
+str(iris)
+```
+Summary of the dataframe
+```{r}
+summary(iris) # for factor/categorical variables, this gives a count of all categories
+```
+
+
+# Make few changes to data
+
+## Changing names of columns/headers
+
+```{r eval=FALSE}
+names(dataname)=c("newcol1","newcol2","newcol3") # for a 3 column dataset
+names(dataname)[3]="latestcol3name" # changing name for only the third column
+```
+
